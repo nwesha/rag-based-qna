@@ -1,0 +1,51 @@
+GUIDE: 
+
+1)
+Prepare the Text Data and Embeddings if needed:
+
+Ensure the text data (e.g., ConceptsofBiology-WEB.txt) is available in the specified path. If not done already, create embeddings and splits using the commented code at the start which looks like this: 
+
+# creates split data
+sp = create_split_data(docs)
+# creates embeddings for the whole book
+embeded_data = create_embedding(sp)
+
+2)
+Load the Embeddings and Splits in Streamlit App:
+I have provided these files but in case you create custom ones using above code you can replace them.
+Ensure the embeddings.pkl and splits.pkl files are in the same directory as your Streamlit script.
+
+3)
+Run the Streamlit Application:
+
+Use the following command to run the application:
+streamlit run your_script.py
+Replace your_script.py with the name of your script file("st.py" in the files I have provided).
+
+
+
+Methodology Followed: 
+
+1)
+Data Preparation:
+The provided book is converted to a text file is read and split into manageable chunks.
+Embeddings for these chunks are created using a pre-trained model (paraphrase-mpnet-base-v2).
+
+2)
+Embedding Creation:
+Each text chunk is converted into an embedding vector using Sentence Transformers.
+
+3)
+Document Retrieval:
+The user query is converted into an embedding.
+Cosine similarity is used to find the most relevant text chunks from the embeddings.
+
+4)
+Question Answering:
+Retrieved text chunks are used as context for answering the user's question.
+Two methods are implemented: one using AutoModelForQuestionAnswering and another using the pipeline from the Transformers library.
+
+5)
+Streamlit Interface:
+A user-friendly interface is provided using Streamlit, allowing users to input questions and get answers.
+By following these steps, you will set up the project and be able to run the PDF Question Answering System locally. If you encounter any issues, refer to the official documentation of the libraries used, or feel free to reach out for support.
