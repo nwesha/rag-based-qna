@@ -1,4 +1,4 @@
-# PDF Question Answering System
+# Secure Document Querying System
 
 This project is a Streamlit-based application designed to answer questions related to the content of a PDF file. The application processes a textbook, creates embeddings, retrieves relevant sections, and generates answers to user queries using different models.
 
