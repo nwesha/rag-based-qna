@@ -1,57 +1,146 @@
-# Secure Document Querying System
+# 📄 RAG-based PDF Question Answering System
 
-This project is a Streamlit-based application designed to answer questions related to the content of a PDF file. The application processes a textbook, creates embeddings, retrieves relevant sections, and generates answers to user queries using different models.
+A Retrieval-Augmented Generation (RAG) pipeline that lets you upload any PDF, ask natural-language questions about its content, and get extractive answers with full source transparency.
 
-## Features
+Built with **Streamlit + SentenceTransformers + FAISS + Hugging Face Transformers** — no API keys, no cloud dependencies.
 
-- **Text Embedding:** Create embeddings for the text from the provided PDF.
-- **Document Retrieval:** Retrieve relevant documents based on the cosine similarity of the embeddings.
-- **Question Answering:** Use pre-trained models to answer questions based on the retrieved documents.
-- **User Interface:** Streamlit-based UI to interact with the system.
+## ✨ Features
 
-## Setup Guide
+- **PDF Upload Pipeline** — Upload any PDF → automatic text extraction → configurable chunking
+- **FAISS Vector Retrieval** — Fast approximate nearest-neighbor search (~100× faster than brute-force cosine similarity)
+- **Extractive QA** — BERT-Large or DistilBERT extracts precise answers from retrieved chunks
+- **Source Transparency** — Every answer shows the retrieved source chunks with similarity scores and page numbers
+- **Configurable Parameters** — Tune chunk size, overlap, top-k, and QA model via the sidebar
+- **Cached Model Loading** — Models load once via `@st.cache_resource`, not on every query
+- **Retrieval Evaluation** — Recall@1/3/5 metrics across a chunk-size × top-k experiment grid
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    A["📤 PDF Upload"] --> B["📝 Text Extraction\n(PyMuPDF)"]
+    B --> C["✂️ Chunking\n(configurable size/overlap)"]
+    C --> D["🧠 Embedding\n(SentenceTransformer)"]
+    D --> E["📦 FAISS Index\n(Inner Product)"]
+
+    F["❓ User Query"] --> G["🧠 Query Embedding"]
+    G --> E
+    E --> H["🔍 Top-K Retrieval"]
+    H --> I["🤖 Extractive QA\n(BERT/DistilBERT)"]
+    I --> J["💡 Answer + Sources"]
+```
+
+## 📁 Project Structure
+
+```
+RAG_based_qna/
+├── app.py                          # Streamlit entry point
+├── src/
+│   ├── __init__.py
+│   ├── config.py                   # Centralized configuration
+│   ├── pdf_processor.py            # PDF → text → chunks
+│   ├── embeddings.py               # SentenceTransformer + FAISS
+│   ├── retriever.py                # Top-k retrieval
+│   └── qa_model.py                 # Extractive QA models
+├── evaluation/
+│   ├── eval_dataset.json           # 20 ground-truth Q&A pairs
+│   ├── run_evaluation.py           # Recall@k experiment grid
+│   └── results/                    # Output CSVs and heatmaps
+├── sample_data/
+│   ├── ConceptsofBiology.pdf       # Sample PDF for testing
+│   └── ConceptsofBiology-WEB.txt   # Source text
+├── requirements.txt
+└── README.md
+```
+
+## 🚀 Quickstart
 
 ### Prerequisites
 
-Ensure you have Python installed on your machine. You'll also need to install the required Python packages listed in `requirements.txt`.
+- Python 3.12+
+- pip
 
 ### Installation
 
-1. Clone the repository or download the project files.
-2. Navigate to the project directory.
-3. Install the required packages:
+```bash
+# Clone the repository
+git clone <repo-url>
+cd RAG_based_qna
 
-    ```sh
-    pip install -r requirements.txt
-    ```
+# Install dependencies
+pip install -r requirements.txt
+```
 
-### Running the Application
+### Run the App
 
-1. **Prepare the Data:**
+```bash
+streamlit run app.py
+```
 
-   Ensure you have the necessary data files (`ConceptsofBiology-WEB.txt`, `embeddings.pkl`, `splits.pkl`). If not, you need to create them by processing the PDF as per the commented code in `st.py`.
+Then:
+1. Upload a PDF in the sidebar (or use `sample_data/ConceptsofBiology.pdf`)
+2. Adjust chunk size, overlap, and top-k as desired
+3. Type a question and get an answer with source chunks
 
-2. **Start the Streamlit App:**
+### Run the Evaluation
 
-    ```sh
-    streamlit run st.py
-    ```
+```bash
+python -m evaluation.run_evaluation
+```
 
-### Usage
+This runs a grid search over:
+- **Chunk sizes**: 300, 500, 700, 1000 characters
+- **Top-K values**: 1, 3, 5, 7
 
-- **Embeddings Preparation:**
+And outputs:
+- `evaluation/results/recall_results.csv` — per-question results
+- `evaluation/results/recall_summary.csv` — aggregated Recall@k
+- `evaluation/results/recall_heatmap.png` — visual comparison
 
-  If you need to create embeddings and splits, use the following code snippets in `st.py` (uncomment and modify the paths as needed):
+## 📊 Evaluation Methodology
 
-  ```python
-  with open("path/to/ConceptsofBiology-WEB.txt") as f:
-      docs = f.read()
+### Dataset
+20 hand-crafted questions spanning 14 topics from the biology textbook, with:
+- Known expected answers
+- Keyword-based relevance criteria for chunk matching
+- Difficulty levels (easy / medium / hard)
 
-  sp = create_split_data(docs)
-  embeded_data = create_embedding(sp)
+### Metrics
+- **Recall@1**: Was a relevant chunk the single top result?
+- **Recall@3**: Was a relevant chunk in the top 3 results?
+- **Recall@5**: Was a relevant chunk in the top 5 results?
 
-  with open('splits.pkl', 'wb') as f:
-      pickle.dump(sp, f)
+### Experiment Design
+A full grid search over `chunk_size × top_k` measures how chunking granularity and retrieval depth affect retrieval quality. Results are visualized as heatmaps.
 
-  with open('embeddings.pkl', 'wb') as f:
-      pickle.dump(embeded_data, f)
+## ⚙️ Configuration
+
+All defaults are in [`src/config.py`](src/config.py):
+
+| Parameter | Default | Range | Description |
+|-----------|---------|-------|-------------|
+| Chunk Size | 500 chars | 200–1000 | Maximum characters per chunk |
+| Chunk Overlap | 50 chars | 0–200 | Overlap between consecutive chunks |
+| Top-K | 5 | 1–10 | Number of chunks retrieved per query |
+| Embedding Model | `paraphrase-mpnet-base-v2` | — | SentenceTransformer model |
+| QA Model | DistilBERT (Fast) | BERT-Large / DistilBERT | Extractive QA model |
+
+## 🔧 Tech Stack
+
+| Component | Library | Purpose |
+|-----------|---------|---------|
+| UI | Streamlit | Interactive web interface |
+| Embeddings | SentenceTransformers | Dense text embeddings |
+| Vector Search | FAISS (faiss-cpu) | Fast similarity retrieval |
+| QA | Hugging Face Transformers | Extractive question answering |
+| PDF Parsing | PyMuPDF | Text extraction from PDFs |
+| Evaluation | pandas + matplotlib + seaborn | Metrics and visualization |
+
+## 🔮 Future Improvements
+
+- Add support for multi-document querying (upload multiple PDFs)
+- Experiment with different embedding models (e.g., `all-MiniLM-L6-v2`)
+- Implement re-ranking with a cross-encoder for improved precision
+- Add abstractive QA using a generative model (e.g., FLAN-T5)
+- Persist FAISS indices to disk for faster re-loading of previously processed PDFs
+- Add end-to-end answer quality evaluation (Exact Match / F1)

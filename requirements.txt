@@ -1,5 +1,9 @@
-streamlit
-sentence-transformers
-transformers
-scikit-learn
-torch
+streamlit>=1.30
+sentence-transformers>=2.2
+transformers>=4.35
+torch>=2.0
+faiss-cpu>=1.7
+PyMuPDF>=1.23
+matplotlib>=3.7
+seaborn>=0.12
+pandas>=2.0

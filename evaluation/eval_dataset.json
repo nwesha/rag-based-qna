@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "question": "Who is credited with being the first to document the scientific method for scientific inquiry?",
+    "expected_answer": "Sir Francis Bacon",
+    "relevant_chunk_keywords": ["Francis Bacon", "scientific method", "inductive methods"],
+    "difficulty": "easy",
+    "topic": "Introduction to Biology"
+  },
+  {
+    "id": 2,
+    "question": "What chemical rule states that atoms with low atomic numbers tend to bond to achieve eight electrons in their outermost shell?",
+    "expected_answer": "octet rule",
+    "relevant_chunk_keywords": ["octet rule", "outermost shell", "eight electrons"],
+    "difficulty": "easy",
+    "topic": "Chemistry of Life"
+  },
+  {
+    "id": 3,
+    "question": "What is the half-life in years of the radioactive isotope carbon-14 used in carbon dating?",
+    "expected_answer": "5,730 years",
+    "relevant_chunk_keywords": ["5,730 years", "carbon-14", "half-life"],
+    "difficulty": "medium",
+    "topic": "Chemistry of Life"
+  },
+  {
+    "id": 4,
+    "question": "Which scientist proposed the endosymbiotic theory in 1967 to explain the origin of mitochondria and chloroplasts?",
+    "expected_answer": "Lynn Margulis",
+    "relevant_chunk_keywords": ["Lynn Margulis", "endosymbiotic theory", "chloroplasts"],
+    "difficulty": "medium",
+    "topic": "Cell Biology"
+  },
+  {
+    "id": 5,
+    "question": "Which type of intercellular junction forms a watertight seal between adjacent animal cells to prevent materials from leaking?",
+    "expected_answer": "tight junction",
+    "relevant_chunk_keywords": ["tight junction", "watertight seal", "animal cells"],
+    "difficulty": "easy",
+    "topic": "Cell Biology"
+  },
+  {
+    "id": 6,
+    "question": "What class of cholesterol-reducing medications acts by inhibiting the enzyme HMG-CoA reductase?",
+    "expected_answer": "statins",
+    "relevant_chunk_keywords": ["statins", "HMG-CoA reductase", "cholesterol"],
+    "difficulty": "medium",
+    "topic": "Cellular Metabolism"
+  },
+  {
+    "id": 7,
+    "question": "What three-carbon sugar molecule is produced at the end of glycolysis from the breakdown of glucose?",
+    "expected_answer": "pyruvate",
+    "relevant_chunk_keywords": ["glycolysis", "pyruvate", "three-carbon"],
+    "difficulty": "easy",
+    "topic": "Cellular Respiration"
+  },
+  {
+    "id": 8,
+    "question": "Which enzyme catalyzes the initial carbon-fixing reaction between CO2 and RuBP in the Calvin cycle?",
+    "expected_answer": "RuBisCO",
+    "relevant_chunk_keywords": ["RuBisCO", "Calvin cycle", "RuBP"],
+    "difficulty": "easy",
+    "topic": "Photosynthesis"
+  },
+  {
+    "id": 9,
+    "question": "Which tubulin-like protein coordinates prokaryotic cytokinesis and septum formation during binary fission?",
+    "expected_answer": "FtsZ",
+    "relevant_chunk_keywords": ["FtsZ", "cytokinesis", "binary fission"],
+    "difficulty": "medium",
+    "topic": "Cell Division"
+  },
+  {
+    "id": 10,
+    "question": "What term describes the brief interphase between meiosis I and meiosis II that lacks an S phase?",
+    "expected_answer": "interkinesis",
+    "relevant_chunk_keywords": ["interkinesis", "meiosis II", "lacks an S phase"],
+    "difficulty": "hard",
+    "topic": "Genetics and Meiosis"
+  },
+  {
+    "id": 11,
+    "question": "What type of genetic cross is performed between an individual of dominant phenotype and a homozygous recessive individual to determine the dominant individual's genotype?",
+    "expected_answer": "test cross",
+    "relevant_chunk_keywords": ["test cross", "homozygous recessive", "dominant"],
+    "difficulty": "easy",
+    "topic": "Inheritance and Genetics"
+  },
+  {
+    "id": 12,
+    "question": "Which enzyme seals the gaps between synthesized Okazaki fragments on the lagging strand during DNA replication?",
+    "expected_answer": "DNA ligase",
+    "relevant_chunk_keywords": ["DNA ligase", "Okazaki fragments", "lagging strand"],
+    "difficulty": "medium",
+    "topic": "Molecular Biology"
+  },
+  {
+    "id": 13,
+    "question": "Which bacterial species is used in genetic engineering to introduce foreign genes into plant genomes using plasmids?",
+    "expected_answer": "Agrobacterium tumefaciens",
+    "relevant_chunk_keywords": ["Agrobacterium tumefaciens", "transgenic plants", "plasmids"],
+    "difficulty": "medium",
+    "topic": "Biotechnology"
+  },
+  {
+    "id": 14,
+    "question": "Which genetic disorder causing bone marrow failure is unusually prevalent in the South African Afrikaner population due to the founder effect?",
+    "expected_answer": "Fanconi anemia",
+    "relevant_chunk_keywords": ["Fanconi anemia", "founder effect", "Afrikaner"],
+    "difficulty": "hard",
+    "topic": "Evolution and Population Genetics"
+  },
+  {
+    "id": 15,
+    "question": "Which cladistic concept dictates that the best phylogenetic tree is the one requiring the fewest character changes or evolutionary steps?",
+    "expected_answer": "maximum parsimony",
+    "relevant_chunk_keywords": ["maximum parsimony", "fewest", "phylogenetic tree"],
+    "difficulty": "medium",
+    "topic": "Phylogeny and Systematics"
+  },
+  {
+    "id": 16,
+    "question": "What specialized branching hyphae penetrate root cells to facilitate nutrient exchange in arbuscular mycorrhizae?",
+    "expected_answer": "arbuscles",
+    "relevant_chunk_keywords": ["arbuscles", "arbuscular mycorrhiza", "root cells"],
+    "difficulty": "hard",
+    "topic": "Fungi and Microbiology"
+  },
+  {
+    "id": 17,
+    "question": "In angiosperm double fertilization, what triploid tissue develops to provide nutrient reserves for the embryo?",
+    "expected_answer": "endosperm",
+    "relevant_chunk_keywords": ["endosperm", "double fertilization", "triploid"],
+    "difficulty": "medium",
+    "topic": "Plant Biology"
+  },
+  {
+    "id": 18,
+    "question": "Which structure on the aboral surface of a sea star regulates the amount and pressure of water in its water vascular system?",
+    "expected_answer": "madreporite",
+    "relevant_chunk_keywords": ["madreporite", "water vascular system", "echinoderms"],
+    "difficulty": "hard",
+    "topic": "Animal Diversity"
+  },
+  {
+    "id": 19,
+    "question": "Which early-acting cytokines are released by virus-infected cells to signal neighboring uninfected cells to resist viral replication?",
+    "expected_answer": "interferons",
+    "relevant_chunk_keywords": ["interferons", "viral infection", "uninfected cells"],
+    "difficulty": "medium",
+    "topic": "Immunology"
+  },
+  {
+    "id": 20,
+    "question": "Which fungal pathogen is responsible for causing white-nose syndrome in cave-hibernating bats in North America?",
+    "expected_answer": "Geomyces destructans",
+    "relevant_chunk_keywords": ["Geomyces destructans", "white-nose syndrome", "bats"],
+    "difficulty": "hard",
+    "topic": "Conservation Biology"
+  }
+]
