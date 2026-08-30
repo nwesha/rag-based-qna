@@ -11,10 +11,6 @@ venv/
 .venv/
 env/
 
-# Legacy precomputed data
-embeddings.pkl
-splits.pkl
-
 # Streamlit
 .streamlit/
 
