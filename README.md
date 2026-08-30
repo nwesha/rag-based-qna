@@ -1,10 +1,10 @@
-# 📄 RAG-based PDF Question Answering System
+# RAG-based PDF Question Answering System
 
 A Retrieval-Augmented Generation (RAG) pipeline that lets you upload any PDF, ask natural-language questions about its content, and get extractive answers with full source transparency.
 
 Built with **Streamlit + SentenceTransformers + FAISS + Hugging Face Transformers** — no API keys, no cloud dependencies.
 
-## ✨ Features
+## Features
 
 - **PDF Upload Pipeline** — Upload any PDF → automatic text extraction → configurable chunking
 - **FAISS Vector Retrieval** — Fast approximate nearest-neighbor search (~100× faster than brute-force cosine similarity)
@@ -14,7 +14,7 @@ Built with **Streamlit + SentenceTransformers + FAISS + Hugging Face Transformer
 - **Cached Model Loading** — Models load once via `@st.cache_resource`, not on every query
 - **Retrieval Evaluation** — Recall@1/3/5 metrics across a chunk-size × top-k experiment grid
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
     I --> J["💡 Answer + Sources"]
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 RAG_based_qna/
@@ -47,8 +47,7 @@ RAG_based_qna/
 │   ├── run_evaluation.py           # Recall@k experiment grid
 │   └── results/                    # Output CSVs and heatmaps
 ├── sample_data/
-│   ├── ConceptsofBiology.pdf       # Sample PDF for testing
-│   └── ConceptsofBiology-WEB.txt   # Source text
+│   └── ConceptsofBiology.pdf       # Sample PDF for testing
 ├── requirements.txt
 └── README.md
 ```
@@ -65,7 +64,7 @@ RAG_based_qna/
 ```bash
 # Clone the repository
 git clone <repo-url>
-cd RAG_based_qna
+cd rag-based-qna
 
 # Install dependencies
 pip install -r requirements.txt
