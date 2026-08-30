@@ -52,7 +52,7 @@ RAG_based_qna/
 └── README.md
 ```
 
-## 🚀 Quickstart
+## Quickstart
 
 ### Prerequisites
 
@@ -96,7 +96,7 @@ And outputs:
 - `evaluation/results/recall_summary.csv` — aggregated Recall@k
 - `evaluation/results/recall_heatmap.png` — visual comparison
 
-## 📊 Evaluation Methodology
+## Evaluation Methodology
 
 ### Dataset
 20 hand-crafted questions spanning 14 topics from the biology textbook, with:
@@ -112,7 +112,38 @@ And outputs:
 ### Experiment Design
 A full grid search over `chunk_size × top_k` measures how chunking granularity and retrieval depth affect retrieval quality. Results are visualized as heatmaps.
 
-## ⚙️ Configuration
+## Retrieval Evaluation & Benchmarking
+
+We benchmarked the retrieval engine across **Chunk Sizes** (300, 500, 700, 1000 characters) and **Top-K settings** ($k = 1, 3, 5, 7$) using **Recall@k** to determine the optimal vector storage and retrieval parameters.
+
+### Recall@k Heatmap
+
+![Retrieval Evaluation Heatmap](evaluation/results/recall_heatmap.png)
+
+---
+
+### Aggregated Summary Results
+
+| Chunk Size (chars) | Top-1 Recall | Top-3 Recall | Top-5 Recall | Top-7 Recall |
+| :--- | :---: | :---: | :---: | :---: |
+| **300** | 25% | 40% | 40% | 40% |
+| **500** | 35% | 55% | 60% | 60% |
+| **700** | 50% | 55% | 60% | 75% |
+| **1000** | **55%** | **75%** | **80%** | **80%** |
+
+---
+
+### Key Insights & Production Recommendation
+
+1. **Chunk Size Impact:** 
+   - Larger chunk sizes (1000 chars) significantly outperform smaller chunks (300 chars), increasing maximum Recall@5 from **40% to 80%**. Small fragments lack sufficient semantic context to achieve strong embedding similarity.
+2. **Top-K Efficiency & Token Savings:**
+   - At a 1000-character chunk size, increasing Top-K from 5 to 7 yields **0% additional recall gain** (both cap at 80%). 
+3. **Production Recommendation:**
+   - **Optimal Config:** `chunk_size = 1000`, `top_k = 5`
+   - This configuration maximizes retrieval context recall (80%) while keeping LLM prompt token usage and latency low.
+
+## Configuration
 
 All defaults are in [`src/config.py`](src/config.py):
 
@@ -124,7 +155,7 @@ All defaults are in [`src/config.py`](src/config.py):
 | Embedding Model | `paraphrase-mpnet-base-v2` | — | SentenceTransformer model |
 | QA Model | DistilBERT (Fast) | BERT-Large / DistilBERT | Extractive QA model |
 
-## 🔧 Tech Stack
+## Tech Stack
 
 | Component | Library | Purpose |
 |-----------|---------|---------|
@@ -135,7 +166,7 @@ All defaults are in [`src/config.py`](src/config.py):
 | PDF Parsing | PyMuPDF | Text extraction from PDFs |
 | Evaluation | pandas + matplotlib + seaborn | Metrics and visualization |
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - Add support for multi-document querying (upload multiple PDFs)
 - Experiment with different embedding models (e.g., `all-MiniLM-L6-v2`)
