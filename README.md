@@ -2,17 +2,17 @@
 
 A Retrieval-Augmented Generation (RAG) pipeline that lets you upload any PDF, ask natural-language questions about its content, and get extractive answers with full source transparency.
 
-Built with **Streamlit + SentenceTransformers + FAISS + Hugging Face Transformers** — no API keys, no cloud dependencies.
+Built with **Streamlit + SentenceTransformers + FAISS + Hugging Face Transformers**.
 
 ## Features
 
-- **PDF Upload Pipeline** — Upload any PDF → automatic text extraction → configurable chunking
-- **FAISS Vector Retrieval** — Fast approximate nearest-neighbor search (~100× faster than brute-force cosine similarity)
-- **Extractive QA** — BERT-Large or DistilBERT extracts precise answers from retrieved chunks
-- **Source Transparency** — Every answer shows the retrieved source chunks with similarity scores and page numbers
-- **Configurable Parameters** — Tune chunk size, overlap, top-k, and QA model via the sidebar
-- **Cached Model Loading** — Models load once via `@st.cache_resource`, not on every query
-- **Retrieval Evaluation** — Recall@1/3/5 metrics across a chunk-size × top-k experiment grid
+- **PDF Upload Pipeline** - Upload any PDF → automatic text extraction → configurable chunking
+- **FAISS Vector Retrieval** - Fast approximate nearest-neighbor search (~100× faster than brute-force cosine similarity)
+- **Extractive QA** - BERT-Large or DistilBERT extracts precise answers from retrieved chunks
+- **Source Transparency** - Every answer shows the retrieved source chunks with similarity scores and page numbers
+- **Configurable Parameters** - Tune chunk size, overlap, top-k, and QA model via the sidebar
+- **Cached Model Loading** - Models load once via `@st.cache_resource`, not on every query
+- **Retrieval Evaluation** - Recall@1/3/5 metrics across a chunk-size × top-k experiment grid
 
 ## Architecture
 
